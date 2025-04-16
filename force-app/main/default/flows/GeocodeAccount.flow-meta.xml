@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+  <apiVersion>59.0</apiVersion>
+  <label>GeocodeAccount</label>
+  <description>Autolaunched flow to geocode an Account using Google Maps API</description>
+  <status>Active</status>
+  <interviewLabel>Geocode Account Flow</interviewLabel>
+  <variables>
+    <name>recordId</name>
+    <dataType>String</dataType>
+    <isCollection>false</isCollection>
+    <isInput>true</isInput>
+    <isOutput>false</isOutput>
+  </variables>
+  <recordLookups>
+    <name>Get_Account</name>
+    <label>Get Account</label>
+    <locationX>100</locationX>
+    <locationY>100</locationY>
+    <object>Account</object>
+    <filterLogic>AND</filterLogic>
+    <filters>
+      <field>Id</field>
+      <operator>EqualTo</operator>
+      <value>{!recordId}</value>
+    </filters>
+    <outputAssignments/>
+    <storeOutputAutomatically>true</storeOutputAutomatically>
+  </recordLookups>
+  <actionCalls>
+    <name>Callout_GoogleGeocode</name>
+    <label>Callout to Google Maps API</label>
+    <locationX>200</locationX>
+    <locationY>200</locationY>
+    <actionType>apex</actionType>
+    <actionName>GoogleMapsCallout</actionName>
+  </actionCalls>
+  <assignments>
+    <name>Assign_LatLng</name>
+    <label>Assign Latitude and Longitude</label>
+    <locationX>300</locationX>
+    <locationY>300</locationY>
+  </assignments>
+  <recordUpdates>
+    <name>Update_Account_Location</name>
+    <label>Update Account with Location</label>
+    <locationX>400</locationX>
+    <locationY>400</locationY>
+    <inputReference>Get_Account</inputReference>
+    <object>Account</object>
+    <storeOutputAutomatically>false</storeOutputAutomatically>
+  </recordUpdates>
+</Flow>

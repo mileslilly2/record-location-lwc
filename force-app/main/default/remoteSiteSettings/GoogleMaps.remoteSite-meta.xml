@@ -1,0 +1,6 @@
+<RemoteSiteSetting>
+<description>Google Maps Geocoding API</description>
+<disableProtocolSecurity>false</disableProtocolSecurity>
+<isActive>true</isActive>
+<url>https://maps.googleapis.com</url>  
+</RemoteSiteSetting>    
